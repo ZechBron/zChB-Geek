@@ -1,17 +1,26 @@
 <?php
+@session_start();
 
-/*
-Anti revisit by blocking the ip address using htaccess
-Deny from $ip
-*/
-session_start();
+if (isset($_SERVER['HTTP_CLIENT_IP'])) {
+	$ip = $_SERVER['HTTP_CLIENT_IP'];
+}
+elseif (isset($_SERVER['HTTP_X_FORWARDED_FOR'])) {
+	$ip = $_SERVER['HTTP_X_FORWARDED_FOR'];
+}
+elseif (isset($_SERVER['HTTP_CF_CONNECTING_IP'])) {
+	$ip = $_SERVER['HTTP_CF_CONNECTING_IP'];
+}
+else {
+	$ip = $_SERVER['REMOTE_ADDR'];
+}
 
 if (isset($_SESSION['visit'])) {
-   echo "visit one";
    if (isset($_SESSION['visit_two'])) {
-      echo "visit two";
       if (isset($_SESSION['visit_three'])) {
-         echo "block the ip";
+         $zCh = fopen(".htaccess", "a");
+			fwrite($zCh, "Deny from " . $ip . "\n");
+			fclose($zCh);
+			header('HTTP/1.1 404 Not Found');
       }
       else {
          $_SESSION['visit_three'] = "three";
@@ -20,11 +29,9 @@ if (isset($_SESSION['visit'])) {
    else {
       $_SESSION['visit_two'] = "two";
    }
-
 }
 else {
    $_SESSION['visit'] = "one";
 }
-
 
 ?>
